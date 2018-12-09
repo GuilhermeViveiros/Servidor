@@ -1,0 +1,624 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="7738c0fd-6235-4c68-a9dd-bf54ba083d33" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Cliente/Client.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Cliente/ClientConnection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Cliente/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Servidor/ClientData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Servidor/ConcurrentDistributer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Servidor/Interface.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Servidor/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Servidor/Server.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Servidor/ServerData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Servidor/ServerGenerator.java" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/out/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/Servidor$Client.ic" NAME="Client Coverage Results" MODIFIED="1544037059355" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Servidor$Main.ic" NAME="Main Coverage Results" MODIFIED="1544133304618" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Model.*</FILTER>
+    </SUITE>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="Interface.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Servidor/Interface.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-351">
+              <caret line="142" column="3" selection-start-line="142" selection-start-column="3" selection-end-line="142" selection-end-column="3" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#6144#6331#0" expanded="true" />
+                <element signature="e#6330#6331#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ClientData.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Servidor/ClientData.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2082">
+              <caret line="251" column="5" selection-start-line="251" selection-start-column="5" selection-end-line="251" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#10185#10186#0" expanded="true" />
+                <element signature="e#10220#10221#0" expanded="true" />
+                <element signature="e#10434#10435#0" expanded="true" />
+                <element signature="e#10469#10470#0" expanded="true" />
+                <element signature="e#10663#10664#0" expanded="true" />
+                <element signature="e#10693#10694#0" expanded="true" />
+                <element signature="e#10759#10760#0" expanded="true" />
+                <element signature="e#10803#10804#0" expanded="true" />
+                <element signature="e#10878#10879#0" expanded="true" />
+                <element signature="e#10917#10918#0" expanded="true" />
+                <element signature="e#11150#11151#0" expanded="true" />
+                <element signature="e#11189#11190#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ClientConnection.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Cliente/ClientConnection.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="645">
+              <caret line="44" lean-forward="true" selection-start-line="44" selection-end-line="44" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ConcurrentDistributer.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Servidor/ConcurrentDistributer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="825">
+              <caret line="57" column="99" selection-start-line="57" selection-start-column="99" selection-end-line="57" selection-end-column="99" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1409#3336#0" expanded="true" />
+                <element signature="e#3335#3336#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ServerData.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Servidor/ServerData.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Servidor/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="16" column="18" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ServerGenerator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Servidor/ServerGenerator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="179">
+              <caret line="47" column="34" selection-start-line="47" selection-start-column="34" selection-end-line="47" selection-end-column="34" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#872#873#0" expanded="true" />
+                <element signature="e#904#905#0" expanded="true" />
+                <element signature="e#933#934#0" expanded="true" />
+                <element signature="e#965#966#0" expanded="true" />
+                <element signature="e#997#998#0" expanded="true" />
+                <element signature="e#1030#1031#0" expanded="true" />
+                <element signature="e#1185#1186#0" expanded="true" />
+                <element signature="e#1229#1230#0" expanded="true" />
+                <element signature="e#1265#1266#0" expanded="true" />
+                <element signature="e#1192#1193#0" expanded="true" />
+                <element signature="e#1228#1229#0" expanded="true" />
+                <element signature="e#1270#1271#0" expanded="true" />
+                <element signature="e#1303#1304#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Server.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Servidor/Server.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="15" column="33" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Client.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Cliente/Client.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="399">
+              <caret line="88" column="47" selection-start-line="88" selection-start-column="47" selection-end-line="88" selection-end-column="47" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>PrintW</find>
+      <find>pw</find>
+      <find>java.lang</find>
+      <find>System.out</find>
+      <find>System.out.</find>
+      <find>tur</find>
+      <find>Servidor feito na hora Sun Dec 09 14:46:29 WET 2018</find>
+      <find>TurnON</find>
+      <find>Servidor feito na hora</find>
+      <find>Turnon</find>
+      <find>Turnoff</find>
+      <find>CLIENTE</find>
+      <find>VAMOS LA VER QUEM FICA COM O SERVER</find>
+      <find>getEma</find>
+      <find>Client_Name</find>
+      <find>Client_name</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/Model/Utilizador.java" />
+        <option value="$PROJECT_DIR$/src/Model/Servidor.java" />
+        <option value="$PROJECT_DIR$/src/Model/MicroServer.java" />
+        <option value="$PROJECT_DIR$/src/Model/System.java" />
+        <option value="$PROJECT_DIR$/src/Model/Client.java" />
+        <option value="$PROJECT_DIR$/src/Model/Server.java" />
+        <option value="$PROJECT_DIR$/src/Model/LargeServer.java" />
+        <option value="$PROJECT_DIR$/src/Model/AllTypeOfServer.java" />
+        <option value="$PROJECT_DIR$/src/Model/ServerType.java" />
+        <option value="$PROJECT_DIR$/src/Model/User.java" />
+        <option value="$PROJECT_DIR$/src/Model/SVSystem.java" />
+        <option value="$PROJECT_DIR$/src/Model/DistributeServers.java" />
+        <option value="$PROJECT_DIR$/src/Cliente/User.java" />
+        <option value="$PROJECT_DIR$/src/Servidor/SeverData.java" />
+        <option value="$PROJECT_DIR$/src/Servidor/ServerData.java" />
+        <option value="$PROJECT_DIR$/src/Servidor/Main.java" />
+        <option value="$PROJECT_DIR$/src/Cliente/Client.java" />
+        <option value="$PROJECT_DIR$/src/Servidor/Server.java" />
+        <option value="$PROJECT_DIR$/src/Servidor/ServerGenerator.java" />
+        <option value="$PROJECT_DIR$/src/Servidor/Interface.java" />
+        <option value="$PROJECT_DIR$/src/Cliente/ClientConnection.java" />
+        <option value="$PROJECT_DIR$/src/Servidor/ClientData.java" />
+        <option value="$PROJECT_DIR$/src/Servidor/ConcurrentDistributer.java" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="width" value="1440" />
+    <option name="height" value="900" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Servidor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Servidor" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Servidor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Servidor" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Servidor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Servidor" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Cliente" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Servidor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Servidor" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Servidor" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Client" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="Cliente.Client" />
+      <module name="Servidor" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Servidor.Main" />
+      <module name="Servidor" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="Model.System" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <properties />
+      <listeners />
+    </configuration>
+    <list>
+      <item itemvalue="Application.Client" />
+      <item itemvalue="Application.Main" />
+    </list>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7738c0fd-6235-4c68-a9dd-bf54ba083d33" name="Default" comment="" />
+      <created>1543676339795</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1543676339795</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="bottom" id="TODO" order="9" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32900944" />
+      <window_info anchor="right" id="Palette&#9;" order="1" />
+      <window_info id="Image Layers" order="4" />
+      <window_info anchor="right" id="Capture Analysis" order="0" />
+      <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" />
+      <window_info anchor="right" id="Maven Projects" order="3" />
+      <window_info active="true" anchor="bottom" id="Run" order="5" visible="true" weight="0.32900944" />
+      <window_info anchor="bottom" id="Version Control" order="2" />
+      <window_info anchor="bottom" id="Terminal" order="0" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info id="Designer" order="0" />
+      <window_info content_ui="combo" id="Project" order="5" visible="true" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="4" />
+      <window_info id="Structure" order="6" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="7" weight="0.25" />
+      <window_info id="UI Designer" order="1" />
+      <window_info anchor="right" id="Theme Preview" order="2" />
+      <window_info anchor="bottom" id="Debug" order="6" weight="0.39976415" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="8" weight="0.25" />
+      <window_info anchor="right" id="Coverage" order="5" side_tool="true" weight="0.2986111" />
+      <window_info anchor="bottom" id="Inspection" order="8" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="6" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="Message" order="3" />
+      <window_info anchor="bottom" id="Cvs" order="7" weight="0.25" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Servidor/ConcurrentDistributer.java</url>
+          <line>20</line>
+          <properties />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Servidor/ClientData.java</url>
+          <line>229</line>
+          <properties />
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="4" />
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/Model/Client.java" />
+    <entry file="file://$PROJECT_DIR$/src/Model/SVSystem.java" />
+    <entry file="file://$PROJECT_DIR$/src/Model/ServerType.java" />
+    <entry file="file://$PROJECT_DIR$/src/Model/MicroServer.java" />
+    <entry file="file://$PROJECT_DIR$/src/Model/Client.java" />
+    <entry file="file://$PROJECT_DIR$/src/Model/Server.java" />
+    <entry file="file://$PROJECT_DIR$/src/Model/SVSystem.java" />
+    <entry file="file://$PROJECT_DIR$/src/Model/Server.java" />
+    <entry file="file://$PROJECT_DIR$/src/Model/ServerType.java" />
+    <entry file="file://$PROJECT_DIR$/src/Model/MicroServer.java" />
+    <entry file="file://$PROJECT_DIR$/src/Model/Client.java" />
+    <entry file="file://$PROJECT_DIR$/src/Model/SVSystem.java" />
+    <entry file="file://$PROJECT_DIR$/src/Model/Server.java" />
+    <entry file="file://$PROJECT_DIR$/src/Model/Client.java" />
+    <entry file="file://$PROJECT_DIR$/src/Model/SVSystem.java" />
+    <entry file="file://$PROJECT_DIR$/src/Model/DistributeServers.java" />
+    <entry file="file://$PROJECT_DIR$/src/Model/Server.java" />
+    <entry file="file://$PROJECT_DIR$/src/Model/User.java" />
+    <entry file="file://$PROJECT_DIR$/src/Model/Client.java" />
+    <entry file="file://$PROJECT_DIR$/src/Model/SVSystem.java" />
+    <entry file="file://$PROJECT_DIR$/src/Model/Server.java" />
+    <entry file="file://$PROJECT_DIR$/src/Model/User.java" />
+    <entry file="file://$PROJECT_DIR$/src/Model/Client.java" />
+    <entry file="file://$PROJECT_DIR$/src/Model/DistributeServers.java" />
+    <entry file="file://$PROJECT_DIR$/src/Model/Cliente.java" />
+    <entry file="file://$PROJECT_DIR$/src/Model/Utilizador.java" />
+    <entry file="file://$PROJECT_DIR$/src/Model/Sistema.java" />
+    <entry file="file://$PROJECT_DIR$/src/Model/Servidor.java" />
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/src.zip!/java/util/function/BiConsumer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="363">
+          <caret line="52" column="9" selection-start-line="52" selection-start-column="9" selection-end-line="52" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../EchoClient.java" />
+    <entry file="file://$PROJECT_DIR$/../ServerChat.java" />
+    <entry file="file://$PROJECT_DIR$/src/Model/MicroServer.java" />
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/src.zip!/java/util/HashMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="1441" selection-start-line="1441" selection-end-line="1441" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Model/Client.java" />
+    <entry file="file://$PROJECT_DIR$/src/Model/User.java" />
+    <entry file="file://$PROJECT_DIR$/src/Model/Server.java" />
+    <entry file="file://$PROJECT_DIR$/src/Model/ServerType.java" />
+    <entry file="file://$PROJECT_DIR$/src/Servidor/CommunicationIO.java" />
+    <entry file="file://$PROJECT_DIR$/src/Model/SVSystem.java" />
+    <entry file="file://$PROJECT_DIR$/src/Model/DistributeServers.java" />
+    <entry file="file://$PROJECT_DIR$/src/Cliente/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="42" selection-start-line="10" selection-start-column="42" selection-end-line="10" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/src.zip!/java/util/LinkedList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="269" selection-start-line="269" selection-end-line="269" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Cliente/Client.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="88" column="47" selection-start-line="88" selection-start-column="47" selection-end-line="88" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Servidor/Server.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="33" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Servidor/ServerGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="47" column="34" selection-start-line="47" selection-start-column="34" selection-end-line="47" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#872#873#0" expanded="true" />
+            <element signature="e#904#905#0" expanded="true" />
+            <element signature="e#933#934#0" expanded="true" />
+            <element signature="e#965#966#0" expanded="true" />
+            <element signature="e#997#998#0" expanded="true" />
+            <element signature="e#1030#1031#0" expanded="true" />
+            <element signature="e#1185#1186#0" expanded="true" />
+            <element signature="e#1229#1230#0" expanded="true" />
+            <element signature="e#1265#1266#0" expanded="true" />
+            <element signature="e#1192#1193#0" expanded="true" />
+            <element signature="e#1228#1229#0" expanded="true" />
+            <element signature="e#1270#1271#0" expanded="true" />
+            <element signature="e#1303#1304#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Servidor/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="18" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Servidor/ServerData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Servidor/Interface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-351">
+          <caret line="142" column="3" selection-start-line="142" selection-start-column="3" selection-end-line="142" selection-end-column="3" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#6144#6331#0" expanded="true" />
+            <element signature="e#6330#6331#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Servidor/ClientData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2082">
+          <caret line="251" column="5" selection-start-line="251" selection-start-column="5" selection-end-line="251" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#10185#10186#0" expanded="true" />
+            <element signature="e#10220#10221#0" expanded="true" />
+            <element signature="e#10434#10435#0" expanded="true" />
+            <element signature="e#10469#10470#0" expanded="true" />
+            <element signature="e#10663#10664#0" expanded="true" />
+            <element signature="e#10693#10694#0" expanded="true" />
+            <element signature="e#10759#10760#0" expanded="true" />
+            <element signature="e#10803#10804#0" expanded="true" />
+            <element signature="e#10878#10879#0" expanded="true" />
+            <element signature="e#10917#10918#0" expanded="true" />
+            <element signature="e#11150#11151#0" expanded="true" />
+            <element signature="e#11189#11190#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Cliente/ClientConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="645">
+          <caret line="44" lean-forward="true" selection-start-line="44" selection-end-line="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Servidor/ConcurrentDistributer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="825">
+          <caret line="57" column="99" selection-start-line="57" selection-start-column="99" selection-end-line="57" selection-end-column="99" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1409#3336#0" expanded="true" />
+            <element signature="e#3335#3336#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
