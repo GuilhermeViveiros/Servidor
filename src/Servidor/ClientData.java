@@ -227,7 +227,7 @@ public class ClientData {
         }
     }
 
-        //Tenho que implementar um chat como na aula , cada cliente precisa de saber qual o que ganhou um determinado server
+    //Tenho que implementar um chat como na aula , cada cliente precisa de saber qual o que ganhou um determinado server
     //retira e devolve o nome do cliente que ganhou a lotaria de um determinado server
     public static String getWinner(String Server_Name){
         try{

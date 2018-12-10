@@ -13,7 +13,7 @@ public class Interface {
     private Socket s;
     private PrintWriter pw;
     private BufferedReader br;
-    private Client c;
+    private Client c = new Client();
     private final ReentrantLock lock = new ReentrantLock();
     private String[] messages;
     private String aux;
@@ -35,7 +35,6 @@ public class Interface {
                     String current;
                     pw.println(Login());
                     while ((current=br.readLine())!=null){
-                        System.out.println(current);
                         write(current);
                     }
 
@@ -56,7 +55,7 @@ public class Interface {
     public void write(String x) throws IOException ,InterruptedException{
         try {
             this.lock.lock();
-
+            System.out.println("Received: \""  + x + "\" from " + c.getEmail());
             this.messages = x.split(" ");
             System.out.println(messages.length);
 
@@ -73,20 +72,19 @@ public class Interface {
                     }
 
                     else {
-                        pw.println("\nDigite o seu nome , email e password para o serviço Registar");
+                        pw.println("\n$Request - Digite o seu nome \n$Request - Digite o seu email \n$Request - Digite a sua password\n$SendReply");
                     }
                     break;
                 case "Autenticar":
-
                     if (messages.length > 1) {
                         if((this.c = ClientData.Autentication(messages[1], messages[2]))!=null){//itentificação estar correta
 
                             pw.println(Services());
                         }else{
-                            pw.println("\nDigitos errados.Tente novamente\n\n");
+                            pw.println("\nDados errados. Tente novamente\n\n" + Login());
                         }
                     }
-                    else pw.println("\nDigite o seu email e password para o serviço Autenticar");
+                    else pw.println("\n$Request - Digite o seu email\n$Request - Digite a sua password\n$SendReply");
                     break;
 
                 case "Servidores":
@@ -94,15 +92,18 @@ public class Interface {
                     pw.println(Services());
                     break;
 
-                case ("Requesitar"):
+                case ("Requisitar"):
                     if (messages.length == 2) {
                         if(!ClientData.RequestServer(c.getEmail(),messages[1])){
-                            pw.println("\nDigite um tipo de server correto!\n\n");
+                            pw.println("\nDigite um tipo de server correto!\n\n" + Services());
                         }else{
                             ConcurrentDistributer.distribute_servers();//começa a distribuir os servers
+                            System.out.println(messages[1]);
                             pw.println(Services());
                         }
-                    }else pw.println("\nQual o servidor que pretende requesitar?\n\n");
+                    }else pw.println("\n"+ServerData.showServers()+"\n" +
+                                     "$Request - Qual o servidor que pretende requesitar?\n" +
+                                     "$SendReply\n");
                     break;
 
                 case "MyServers":
@@ -130,25 +131,23 @@ public class Interface {
                     break;
 
                 case "Leave_Program" :
-                    pw.println("\nVolte Sempre!!! :D\n\n");
+                    pw.println("\nVolte Sempre!!!\n\n");
                     s.shutdownOutput();
                     break;
 
                 case "Leiloar_Server":
                     if(messages.length == 3){
                         if(!ClientData.SaleServer(c.getEmail() , messages[1],(float)Integer.parseInt(messages[2]))){
-                            pw.println("\nDigite um server válido.\n");
+                            pw.println("\nDigite um server válido.\n" + Services());
                         }else {
                             aux = messages[1];
                             pw.println(Services());
                         }
-                    }else pw.println("\nDigite qual o server que pretende leiloar e o valor disponivel a pagar pelo mesmo:\n");
+                    }else pw.println("\n$Request - Digite qual o server que pretende leiloar\n$Request - Quanto deseja pagar pelo mesmo?\n$SendReply\n");
 
                     break;
                 default:
-                    pw.println("\nUps!Serviço desconhecido : \n" +
-                            "Importante : Caso deseje aceder a algum serviço digite -> 'Nome do serviço' sem espaços \n" +
-                            "             Caso sejam lhe pedido parametros digite -> 'Nome do serviço' sem espaços e os sucessivos'parametros' \n\n");
+                    pw.println("\nUps!Serviço desconhecido: \n Utilize <optionNumber> ou coloque os dados pedidos caso necessário");
                     break;
 
             }
@@ -169,13 +168,9 @@ public class Interface {
 
 
     public String Login(){
-
-        return ( "\nBem Vindo ! :D\n" +
-                "Importante : Caso deseje aceder a algum serviço digite -> 'Nome do serviço' sem espaços\n"+
-                "             Caso sejam lhe pedido parametros digite -> 'Nome do serviço' sem espaços e os sucessivos'parametros' \n\n" +
-                "Serviços iniciais do sistema : \n\n" +
-                "Registar\n" +
-                "Autenticar\n"
+        return ( "$Clear\nBem Vindo !\n" +
+                "$Registar - Registar\n" +
+                "$Autenticar - Autenticar\n"
         );
     }
 
@@ -184,15 +179,14 @@ public class Interface {
      * @return
      */
     public static String Services(){
-
-        return ( "\nServiços disponíveis no sistema : \n\n" +
-                "1)Servidores\n" +
-                "2)Requesitar\n" +
-                "3)MyServers\n" +
-                "4)Saldo\n" +
-                "5)Leave\n" +
-                "6)Leiloar_Server\n" +
-                "7)Leave_Program \n"
+        return ( "$Clear\nServiços disponíveis no sistema : \n\n" +
+                "$Servidores - Servidores\n" +
+                "$Requisitar - Requesitar\n" +
+                "$MyServers - MyServers\n" +
+                "$Saldo - Saldo\n" +
+                "$Leave - Leave\n" +
+                "$Leiloar_Server - Leiloar_Server\n" +
+                "$Leave_Program - Leave_Program\n"
         );
     }
 
