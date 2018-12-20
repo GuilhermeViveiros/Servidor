@@ -48,7 +48,6 @@ public class ConcurrentDistributer {
     }
 
     public static void deal_sale_servers(String Server_name) {
-
         //atribui um cliente a este servidor
         Thread x = new Thread() {
 
@@ -56,13 +55,11 @@ public class ConcurrentDistributer {
 
                 Server sv;
                 while ((sv = ServerData.checkAnyServer(Server_name)) == null) {//enquanto não houver nenhum server livre do tipo Server_name espera
-                    try {
-                        System.out.println("Adormece");
-                        ServerData.await(Server_name);//espera que algum server volte
-                        System.out.println("Acordei");
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+
+                    System.out.println("Adormece");
+                    ServerData.await(Server_name);//espera que algum server volte
+                    System.out.println("Acordei");
+
                 }
 
                 String Client_email = "";//cliente name para o cliente que der mais pelo server

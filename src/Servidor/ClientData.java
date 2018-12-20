@@ -51,7 +51,8 @@ public class ClientData {
             if(!clients.containsKey(email)){//caso não contenha mail
                 Client c = new Client(name,email,password);
                 clients.put(email,c);
-                clients_contidions.put(email,lock.newCondition());
+                clients_contidions.put(email,lock.newCondition());//adiciona a condição do utilizador
+                clients_msg.put(email,null);//adiciona o cliente ao sistema de mensagens
                 return c;
             }
             return null;
@@ -116,7 +117,6 @@ public class ClientData {
                     acquired_servers.put(Client_email, tmp);
                 }
             }
-
 
         } finally {
             lock.unlock();
@@ -239,9 +239,10 @@ public class ClientData {
 
             String x = ("Cliente " + Client_email + " ganhou o server " + Server_name);
 
+
             for(String tmp : clients_msg.keySet()) {
 
-                if (clients_msg.containsKey(tmp)) {//caso o cliente já tenha mensagens
+                if (clients_msg.get(tmp)!=null) {//caso o cliente já tenha mensagens
                     clients_msg.get(tmp).add(x);
                     System.out.println("Cliente " + tmp + " recebeu uma mensagem");
                     ClientData.signal(tmp); //avisa que o cliente x já tem mensagens disponíveis
@@ -253,9 +254,6 @@ public class ClientData {
                     ClientData.signal(tmp); //avisa que o cliente x já tem mensagens disponíveis
                 }
             }
-
-
-
         }finally {
             lock.unlock();
         }

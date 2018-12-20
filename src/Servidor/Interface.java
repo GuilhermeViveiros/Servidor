@@ -23,7 +23,6 @@ public class Interface {
         this.br = new BufferedReader(new InputStreamReader(this.s.getInputStream()));
         this.c = new Client();
         read();
-
     }
 
     //está sempre a ler as mensagens do utilizador
@@ -50,6 +49,33 @@ public class Interface {
 
     }
 
+    //le as mensagens relacionados com os algoritmos do servidor
+    public void answers(){
+        Thread readMsg = new Thread(){
+            public void run() {
+
+                while (ClientData.getClients_msg().get(c.getEmail())==null) {//enquanto não tiver mensagem
+                    //espera para o 1 caso
+                    try {//aqui não existem mensagens
+                        System.out.println("Acabaram as mensagens");
+
+                        ClientData.await(c.getEmail());
+
+                        System.out.println("As mensagenes voltaram");
+                        //aqui já existem e serão removidas
+                        ClientData.getClients_msg().get(c.getEmail()).forEach(s1 -> pw.println(s1));//imprime todas as mensagens
+                        ClientData.getClients_msg().put(c.getEmail(), null);//apaga todas as mensagens
+
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                System.out.println("NAO DEVIA ESTAR AQUI FDSSSS");
+            }
+        };readMsg.start();
+    }
+
 
     //está resultados para as respostas dos utilizadores
     public void write(String x) throws IOException ,InterruptedException{
@@ -65,6 +91,7 @@ public class Interface {
                     if (messages.length == 4) {
                         if((this.c = ClientData.addUser(messages[1], messages[2], messages[3]))!=null){//itentificação estar correta
                             System.out.println("nome , email , pass " + messages[1] + " " + messages[2] + " " + messages[3]);
+                            answers();
                             pw.println(Services());
                         }else{
                             pw.println("\nDigitos errados , email já está a ser utilizador.Tente novamente\n\n");
@@ -78,7 +105,7 @@ public class Interface {
                 case "Autenticar":
                     if (messages.length > 1) {
                         if((this.c = ClientData.Autentication(messages[1], messages[2]))!=null){//itentificação estar correta
-
+                            answers();
                             pw.println(Services());
                         }else{
                             pw.println("\nDados errados. Tente novamente\n\n" + Login());
@@ -151,26 +178,6 @@ public class Interface {
                     break;
 
             }
-
-
-            Thread readMsg = new Thread(){
-                public void run() {
-                    while (!ClientData.getClients_msg().containsKey(c.getEmail()) && !c.getEmail().equals("") ) {//enquanto não tiver mensagem
-                        try {//aqui não existem mensagens
-                            System.out.println("Acabaram as mensagens");
-                            ClientData.await(c.getEmail());
-                            System.out.println("As mensagenes voltaram");
-                            //aqui já existem e serão removidas
-                            ClientData.getClients_msg().get(c.getEmail()).forEach(s1 -> pw.println(s1));//imprime todas as mensagens
-                            ClientData.removeMsg(c.getEmail(), null);//apaga todas as mensagens
-
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            };readMsg.start();
-
         }finally {
             this.lock.unlock();
         }
