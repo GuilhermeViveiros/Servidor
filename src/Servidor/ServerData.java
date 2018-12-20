@@ -1,18 +1,27 @@
 package Servidor;
 
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class ServerData {
     //mapa de servidores do sistema
     private static Map<String,List<Server>> servers = new HashMap<>();
+    private static ReentrantLock lock = new ReentrantLock();
+    private static Map<String,Condition> servers_conditions = new HashMap<>();
 
     static{ //meter vários servidores de um TIPO
+        servers_conditions.put("t3Server",lock.newCondition());
         List<Server> t3Server = new ArrayList<>();
+        servers_conditions.put("m5Server",lock.newCondition());
         List<Server> m5Server = new ArrayList<>();
         List<Server> f4Server = new ArrayList<>();
+        servers_conditions.put("f4Server",lock.newCondition());
 
         t3Server.add(new ServerGenerator("t3Server",20F,1));
         m5Server.add(new ServerGenerator("m5Server",10F,2));
@@ -34,6 +43,59 @@ public class ServerData {
         }
 
         return current;
+    }
+
+    public static void await(String x){
+                try
+                {
+                    lock.lock();
+                    System.out.println("Siga dormir " + x);
+
+                        try {
+                            servers_conditions.get(x).await();
+                        }catch (InterruptedException e){
+                            e.printStackTrace();
+                        }
+
+                } finally
+
+                {
+                    lock.unlock();
+            }
+    }
+
+    public static void signal(String x){
+        Thread a = new Thread() {
+            public void run() {
+                try {
+                    lock.lock();
+
+                    servers_conditions.get(x).signal();
+
+                }finally {
+                    lock.unlock();
+                }
+            }
+
+        };a.start();
+
+    }
+
+    //verifica se algum server do tipo Server_name está livre, devolve o primeiro server a encontrar livre
+    public static Server checkAnyServer(String Server_name){
+        try {
+            lock.lock();
+
+            for (Server x : servers.get(Server_name)) {
+                if (x.getInUse() == false) {
+                    return x;
+                }
+            }
+        }finally {
+            lock.unlock();
+        }
+
+        return null;
     }
 
     //Getter e Setter

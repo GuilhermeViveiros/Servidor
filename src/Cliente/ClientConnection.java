@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class ClientConnection {
+public class  ClientConnection {
     // Nova classe entre cliente e sistema
 
     private Client c;

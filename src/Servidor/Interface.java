@@ -4,8 +4,6 @@ import Cliente.Client;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Interface {
@@ -13,7 +11,7 @@ public class Interface {
     private Socket s;
     private PrintWriter pw;
     private BufferedReader br;
-    private Client c = new Client();
+    private Client c;
     private final ReentrantLock lock = new ReentrantLock();
     private String[] messages;
     private String aux;
@@ -25,6 +23,7 @@ public class Interface {
         this.br = new BufferedReader(new InputStreamReader(this.s.getInputStream()));
         this.c = new Client();
         read();
+
     }
 
     //está sempre a ler as mensagens do utilizador
@@ -48,6 +47,7 @@ public class Interface {
             }
         };
         read.start();
+
     }
 
 
@@ -120,14 +120,14 @@ public class Interface {
                 case "Leave" :
                     if(messages.length == 3) {
                         if(!ClientData.LeaveServer(c.getEmail(),messages[1],Integer.parseInt(messages[2]))) {
-                            pw.println("\nTipo/Id do server errados.Tente novamente.\n");
+                            pw.println("\nTipo/Id do server errados.Tente novamente.\n" + Services());
                         }
                         else {
                             pw.println("Removido");
                             pw.println(Services());
                         }
                     }
-                    else pw.println("\nDigite o tipo e id do server\n");
+                    else pw.println("\n$Request - Digite o tipo do server\n$Request - id do server\n$SendReply\n");
                     break;
 
                 case "Leave_Program" :
@@ -152,13 +152,24 @@ public class Interface {
 
             }
 
-            Thread tmp = new Thread(){
-                public void run(){
-                    String tmp;
-                    while((tmp = ClientData.getWinner(aux))==null){
-                    }pw.println("Cliente " + tmp + " ganhou a lotação do server: " + aux);
+
+            Thread readMsg = new Thread(){
+                public void run() {
+                    while (!ClientData.getClients_msg().containsKey(c.getEmail()) && !c.getEmail().equals("") ) {//enquanto não tiver mensagem
+                        try {//aqui não existem mensagens
+                            System.out.println("Acabaram as mensagens");
+                            ClientData.await(c.getEmail());
+                            System.out.println("As mensagenes voltaram");
+                            //aqui já existem e serão removidas
+                            ClientData.getClients_msg().get(c.getEmail()).forEach(s1 -> pw.println(s1));//imprime todas as mensagens
+                            ClientData.removeMsg(c.getEmail(), null);//apaga todas as mensagens
+
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
-            };tmp.start();
+            };readMsg.start();
 
         }finally {
             this.lock.unlock();

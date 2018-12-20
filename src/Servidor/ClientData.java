@@ -5,6 +5,7 @@ import javafx.util.Pair;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class ClientData {
@@ -20,6 +21,13 @@ public class ClientData {
     private static ReentrantLock lock = new ReentrantLock();
     //mapa de clientes que ganharam um determinado server por leilao -> Server,Cliente
     private static Map<String,String> sale_winners = new HashMap<>();
+    //mapa de mensagens para cada cliente
+    private static Map<String,LinkedList<String>> clients_msg = new HashMap<>();
+    //cada cliente tem uma restrição
+    private static Map<String,Condition> clients_contidions = new HashMap<>();
+
+
+
 
     //autentica um utilizador
     public static Client Autentication(String email,String password) throws IOException {
@@ -43,6 +51,7 @@ public class ClientData {
             if(!clients.containsKey(email)){//caso não contenha mail
                 Client c = new Client(name,email,password);
                 clients.put(email,c);
+                clients_contidions.put(email,lock.newCondition());
                 return c;
             }
             return null;
@@ -99,7 +108,7 @@ public class ClientData {
 
             //Caso o server tenha sido leiloado
             if(sv.getSaleServer().equals("Leiloado")) {
-                System.out.println("CONSEGUI O SEVER PA " + Client_email + sv.getName());
+
                 if (acquired_servers.containsKey(Client_email)) acquired_servers.get(Client_email).add(sv);
                 else {
                     LinkedList<Server> tmp = new LinkedList<>();
@@ -176,12 +185,19 @@ public class ClientData {
     public static Boolean LeaveServer(String Client_email,String Server_name,Integer Server_id){
         try {
             lock.lock();
-            for (Server sv : ServerData.getServers().get(Server_name)) {
-                if (sv.getServerId() == Server_id) {
-                    sv.TurnOff();//poe o server inativo
-                    acquired_servers.get(Client_email).remove(sv);//reitra o server dos adquiridos do servidor
-                    return true;
-                }
+                for (Server sv : ServerData.getServers().get(Server_name)) {
+                    if (sv.getServerId() == Server_id) {
+                        try {
+                            sv.TurnOff();//poe o server inativo
+                            synchronized (Server_name) {
+                                ServerData.signal(Server_name);//aviso os clientes que este server está disponível
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        acquired_servers.get(Client_email).remove(sv);//reitra o server dos adquiridos do servidor
+                        return true;
+                    }
             }
         }finally {
             lock.unlock();
@@ -205,7 +221,7 @@ public class ClientData {
                 }
                 System.out.println("Cliente quer comprar server " + Client_email + " " +  Server_name);
 
-                ConcurrentDistributer.deal_sale_servers();//trata dos servers a leilao
+                ConcurrentDistributer.deal_sale_servers(Server_name);//trata dos servers a leilao
 
 
                 return true;
@@ -216,36 +232,92 @@ public class ClientData {
         return false;
     }
 
-    //adiciona o cliente que ganhou o leilao de um determinado server
-    public static void addSale_Winners(String Client_email, String Server_name){
-        try{
+    //adiciona uma mensagem a todos os clientes
+    public static void addClients_msg(String Client_email, String Server_name){
+        try {
             lock.lock();
-            System.out.println("Cliente ganhou o server, nice" + Client_email + "  " + Server_name);
-            sale_winners.put(Server_name,Client_email);
+
+            String x = ("Cliente " + Client_email + " ganhou o server " + Server_name);
+
+            for(String tmp : clients_msg.keySet()) {
+
+                if (clients_msg.containsKey(tmp)) {//caso o cliente já tenha mensagens
+                    clients_msg.get(tmp).add(x);
+                    System.out.println("Cliente " + tmp + " recebeu uma mensagem");
+                    ClientData.signal(tmp); //avisa que o cliente x já tem mensagens disponíveis
+
+                } else {
+                    LinkedList y = new LinkedList();
+                    y.add(x);
+                    clients_msg.put(tmp, y);
+                    ClientData.signal(tmp); //avisa que o cliente x já tem mensagens disponíveis
+                }
+            }
+
+
+
         }finally {
             lock.unlock();
         }
     }
-
-    //Tenho que implementar um chat como na aula , cada cliente precisa de saber qual o que ganhou um determinado server
-    //retira e devolve o nome do cliente que ganhou a lotaria de um determinado server
-    public static String getWinner(String Server_Name){
-        try{
-            lock.lock();
-            //quando esta função é chamada , o sale_winners nunca está vazio , logo não me preocupo se está vazio ou não
-            if(!sale_winners.containsKey(Server_Name)) return null;
-            return sale_winners.remove(Server_Name);
-        }finally {
-            lock.unlock();
-        }
-    }
-
 
     //remove um server do leilao
     public static void removeSaleServer(String Server_name){
         try{
             lock.lock();
             sale_servers.remove(Server_name);
+        }finally {
+            lock.unlock();
+        }
+    }
+
+
+    //remove um server de um utilizador
+    public static void removeAcquiredServer(Server x){
+        try{
+            lock.lock();
+            for(String Client_email:acquired_servers.keySet()){
+                for(Server sv : acquired_servers.get(Client_email)){
+                    if (sv.equals(x)){
+                        acquired_servers.get(Client_email).remove(sv);
+                        break;
+                    }
+                }
+            }
+        }finally {
+            lock.unlock();
+        }
+    }
+
+    //await para um cliente
+    public static void await(String x) throws InterruptedException{
+        try {
+            lock.lock();
+            clients_contidions.get(x).await();
+        }finally {
+            lock.unlock();
+        }
+    }
+
+
+    public static void signal(String x) {
+        try{
+            lock.lock();
+            clients_contidions.get(x).signal();
+        }finally {
+            lock.unlock();
+        }
+    }
+
+    //remove uma mensagem de um determinado cliente
+    public static void removeMsg(String Client_email,String sms){
+        try {
+            lock.lock();
+            if(sms == null){//remove todas
+                clients_msg.remove(Client_email);
+            }else {//remove especifica
+                clients_msg.get(Client_email).remove(sms);
+            }
         }finally {
             lock.unlock();
         }
@@ -288,6 +360,14 @@ public class ClientData {
 
     public static synchronized Map<String, LinkedList<Server>> getAcquired_servers() {
         return acquired_servers;
+    }
+
+    public static synchronized Map<String, LinkedList<String>> getClients_msg() {
+        return clients_msg;
+    }
+
+    public static synchronized void setClients_msg(Map<String, LinkedList<String>> clients_msg) {
+        ClientData.clients_msg = clients_msg;
     }
 
     public static synchronized void setAcquired_servers(Map<String, LinkedList<Server>> acquired_servers) {

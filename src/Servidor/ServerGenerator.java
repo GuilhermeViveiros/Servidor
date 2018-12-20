@@ -7,6 +7,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.ReentrantLock;
 
 
 public class ServerGenerator implements Server{
@@ -18,8 +20,10 @@ public class ServerGenerator implements Server{
     private Integer serverID; //id of the server
     private boolean inUse; //inform if the server are in use
     private String saleSV;//inform if the server request is by a request or sale
+    private ReentrantLock lock;
 
     public ServerGenerator(String name, Float cost,Integer serverID) {
+        this.lock = new ReentrantLock();
         this.name = name;
         this.cost = cost;
         this.begin = Calendar.getInstance();
@@ -44,6 +48,11 @@ public class ServerGenerator implements Server{
         this.inUse = false;
         this.saleSV = "";
     }
+
+    public ReentrantLock getLock() {
+        return lock;
+    }
+
 
     public String getSaleServer() {
         return saleSV;
