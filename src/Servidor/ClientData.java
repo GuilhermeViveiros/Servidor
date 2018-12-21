@@ -11,6 +11,8 @@ import java.util.concurrent.locks.ReentrantLock;
 public class ClientData {
     //mapa de clientes presentes no sistema
     private static Map<String, Client> clients = new HashMap<>();
+    //cada cliente tem uma restrição
+    private static Map<String,Condition> clients_contidions = new HashMap<>();
     //mapa entre Server e Lista de Clientes que o requesitaram
     private static Map<String,LinkedList<String>> required_servers = new HashMap<>();
     //mapa de servers adquiridos pelos clientes -> Cliente , Lista de Server
@@ -19,12 +21,9 @@ public class ClientData {
     private static Map<String,LinkedList<Pair<String,Float>>> sale_servers = new HashMap<>();
     //lock do sistema
     private static ReentrantLock lock = new ReentrantLock();
-    //mapa de clientes que ganharam um determinado server por leilao -> Server,Cliente
-    private static Map<String,String> sale_winners = new HashMap<>();
     //mapa de mensagens para cada cliente
     private static Map<String,LinkedList<String>> clients_msg = new HashMap<>();
-    //cada cliente tem uma restrição
-    private static Map<String,Condition> clients_contidions = new HashMap<>();
+
 
 
 
@@ -51,6 +50,7 @@ public class ClientData {
             if(!clients.containsKey(email)){//caso não contenha mail
                 Client c = new Client(name,email,password);
                 clients.put(email,c);
+                System.out.println("CLIENTE ADICIONADO");
                 clients_contidions.put(email,lock.newCondition());//adiciona a condição do utilizador
                 clients_msg.put(email,null);//adiciona o cliente ao sistema de mensagens
                 return c;
@@ -95,6 +95,9 @@ public class ClientData {
             if(sv.getSaleServer().equals("Requesitado")) {
                 String x = required_servers.get(server_name).removeFirst();//remove o cliente da lista
 
+                String sms = "Foi lhe adquirido o server " + sv.getName();
+                addClients_msg(null,sms,x);
+
                 if (required_servers.get(server_name).isEmpty())
                     required_servers.remove(server_name); //elimina da lista
 
@@ -104,6 +107,7 @@ public class ClientData {
                     LinkedList<Server> tmp = new LinkedList<>();
                     tmp.add(sv);
                     acquired_servers.put(x, tmp);
+
                 }
             }
 
@@ -185,6 +189,7 @@ public class ClientData {
     public static Boolean LeaveServer(String Client_email,String Server_name,Integer Server_id){
         try {
             lock.lock();
+            if(ServerData.getServers().containsKey(Server_name)) {
                 for (Server sv : ServerData.getServers().get(Server_name)) {
                     if (sv.getServerId() == Server_id) {
                         try {
@@ -198,6 +203,7 @@ public class ClientData {
                         acquired_servers.get(Client_email).remove(sv);//reitra o server dos adquiridos do servidor
                         return true;
                     }
+                }
             }
         }finally {
             lock.unlock();
@@ -232,27 +238,41 @@ public class ClientData {
         return false;
     }
 
-    //adiciona uma mensagem a todos os clientes
-    public static void addClients_msg(String Client_email, String Server_name){
+    //adiciona uma mensagem a todos os clientes ou a um especifico
+    public static void addClients_msg(String sos, String message , String Client_email){
         try {
             lock.lock();
 
-            String x = ("Cliente " + Client_email + " ganhou o server " + Server_name);
+            if(sos!=null) {
 
+                for (String tmp : clients_msg.keySet()) {
 
-            for(String tmp : clients_msg.keySet()) {
+                    if (clients_msg.get(tmp) != null) {//caso o cliente já tenha mensagens
+                        clients_msg.get(tmp).add(message);
+                        System.out.println("Cliente " + tmp + " recebeu uma mensagem");
+                        ClientData.signal(tmp); //avisa que o cliente x já tem mensagens disponíveis
 
-                if (clients_msg.get(tmp)!=null) {//caso o cliente já tenha mensagens
-                    clients_msg.get(tmp).add(x);
-                    System.out.println("Cliente " + tmp + " recebeu uma mensagem");
-                    ClientData.signal(tmp); //avisa que o cliente x já tem mensagens disponíveis
+                    } else {
+                        LinkedList y = new LinkedList();
+                        y.add(message);
+                        clients_msg.put(tmp, y);
+                        ClientData.signal(tmp); //avisa que o cliente x já tem mensagens disponíveis
+                    }
+                }
+            }else{
+                if (clients_msg.get(Client_email) != null) {//caso o cliente já tenha mensagens
+                    clients_msg.get(Client_email).add(message);
+                    System.out.println("Cliente " + Client_email + " recebeu uma mensagem");
+                    ClientData.signal(Client_email); //avisa que o cliente x já tem mensagens disponíveis
 
                 } else {
                     LinkedList y = new LinkedList();
-                    y.add(x);
-                    clients_msg.put(tmp, y);
-                    ClientData.signal(tmp); //avisa que o cliente x já tem mensagens disponíveis
+                    y.add(message);
+                    clients_msg.put(Client_email, y);
+                    System.out.println("ASDASDAS " + Client_email );
+                    ClientData.signal(Client_email); //avisa que o cliente x já tem mensagens disponíveis
                 }
+
             }
         }finally {
             lock.unlock();
@@ -260,14 +280,15 @@ public class ClientData {
     }
 
     //remove um server do leilao
-    public static void removeSaleServer(String Server_name){
-        try{
+    public static void removeSaleServer(String Server_name) {
+        try {
             lock.lock();
             sale_servers.remove(Server_name);
-        }finally {
+        } finally {
             lock.unlock();
         }
     }
+
 
 
     //remove um server de um utilizador
@@ -297,25 +318,11 @@ public class ClientData {
         }
     }
 
-
+    //signal para o cliente
     public static void signal(String x) {
         try{
             lock.lock();
             clients_contidions.get(x).signal();
-        }finally {
-            lock.unlock();
-        }
-    }
-
-    //remove uma mensagem de um determinado cliente
-    public static void removeMsg(String Client_email,String sms){
-        try {
-            lock.lock();
-            if(sms == null){//remove todas
-                clients_msg.remove(Client_email);
-            }else {//remove especifica
-                clients_msg.get(Client_email).remove(sms);
-            }
         }finally {
             lock.unlock();
         }
@@ -330,14 +337,6 @@ public class ClientData {
 
     public static synchronized void  setSale_servers(Map<String, LinkedList<Pair<String, Float>>> sale_servers) {
         ClientData.sale_servers = sale_servers;
-    }
-
-    public static synchronized Map<String, String> getSale_winners() {
-        return sale_winners;
-    }
-
-    public static synchronized void setSale_winners(LinkedHashMap<String, String> sale_winners) {
-        ClientData.sale_winners = sale_winners;
     }
 
     public static synchronized Map<String, Client> getClients() {

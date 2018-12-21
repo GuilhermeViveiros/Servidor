@@ -82,14 +82,23 @@ public class ServerData {
     }
 
     //verifica se algum server do tipo Server_name está livre, devolve o primeiro server a encontrar livre
-    public static Server checkAnyServer(String Server_name){
+    //variavel aux ajuda na determinação do server , porque se quisermos requesitar um server podemos passar por cima dos leiloados
+    public static Server checkAnyServer(String aux , String Server_name){
         try {
             lock.lock();
 
             for (Server x : servers.get(Server_name)) {
-                if (x.getInUse() == false) {
-                    return x;
+                if(aux.equals("Requesitado")) {
+                    if (x.getInUse() == false || x.getSaleServer().equals("Leiloado")) {
+                        return x;
+                    }
                 }
+                if(aux.equals("Leiloado")){
+                    if(x.getInUse() == false){
+                        return  x;
+                    }
+                }
+
             }
         }finally {
             lock.unlock();

@@ -70,8 +70,6 @@ public class Interface {
                         e.printStackTrace();
                     }
                 }
-
-                System.out.println("NAO DEVIA ESTAR AQUI FDSSSS");
             }
         };readMsg.start();
     }
@@ -108,7 +106,7 @@ public class Interface {
                             answers();
                             pw.println(Services());
                         }else{
-                            pw.println("\nDados errados. Tente novamente\n\n" + Login());
+                            pw.println("\nDados errados.\n\n" + Login());
                         }
                     }
                     else pw.println("\n$Request - Digite o seu email\n$Request - Digite a sua password\n$SendReply");
@@ -207,6 +205,5 @@ public class Interface {
                 "$Leave_Program - Leave_Program\n"
         );
     }
-
 
 }
