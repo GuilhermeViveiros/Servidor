@@ -24,7 +24,7 @@ public class  ClientConnection {
     private BufferedReader sin;
     private Map<String,String> opts = new HashMap<>();
     private String lastCmd;
-    volatile static boolean requestingInput = false;
+    private volatile Boolean requestingInput;
 
     public ClientConnection(Client c, Socket s) throws IOException {
         this.c = c;
@@ -32,29 +32,31 @@ public class  ClientConnection {
         this.pw = new PrintWriter(s.getOutputStream(), true);
         this.br = new BufferedReader(new InputStreamReader(System.in));
         this.sin = new BufferedReader(new InputStreamReader(s.getInputStream()));
-
+        this.requestingInput = false;
 
         Thread readTerminal = new Thread() {
             public void run() {
                 String current;
                 try {
                     while ((current = br.readLine()) != null) {
-                        if(requestingInput){
-                            String toAppend = opts.get(lastCmd);
-                            toAppend += " " + current;
-                            opts.replace(lastCmd, toAppend);
-                            requestingInput = false;
-                            //System.out.println("Full command: " + toAppend);
-                        } else
+                        synchronized (requestingInput){
+                            if(requestingInput){
+                                String toAppend = opts.get(lastCmd);
+                                toAppend += " " + current;
+                                opts.replace(lastCmd, toAppend);
+                                requestingInput = false;
+                                requestingInput.notify();
+                                //System.out.println("Full command: " + toAppend);
+                            } else
                             if(opts.containsKey(current)){
-                               // System.out.println(current);
+                                // System.out.println(current);
                                 lastCmd = current;
                                 pw.println(opts.get(current));
                             } else {
                                 System.out.println("Not a valid input, use <optionNumber>");
                             }
+                        }
                     }
-
                     br.close();
                     sin.close();
                     pw.close();
@@ -103,7 +105,10 @@ public class  ClientConnection {
                         case "Request":
                             requestingInput = true;
                             System.out.println(subS[2]);
-                            while(requestingInput);
+                            while(requestingInput)
+                                synchronized(requestingInput){
+                                        requestingInput.wait();
+                                }
                             break;
                         case "SendReply":
                             requestingInput = false;
