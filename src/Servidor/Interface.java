@@ -140,7 +140,7 @@ public class Interface {
 
                 case "Saldo" :
                     if(messages.length == 2) pw.println("Valor a pagar  = " + ClientData.Debts(c.getEmail(), Integer.parseInt(messages[1])) );
-                    else pw.println("Valor a pagar  = " + ClientData.Debts(c.getEmail()));
+                    else pw.println("Valor a pagar = " + String.format("%.2f", ClientData.Debts(c.getEmail())));
                     pw.println(Services());
                     break;
 

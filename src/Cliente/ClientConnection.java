@@ -47,6 +47,7 @@ public class  ClientConnection {
                     String current;
                     try {
                         while ((current = br.readLine()) != null) {
+                            current = filterSpacesFrom(current);
                             if (requestingInput) {
                                 /*if(current.equals("quit") && (opts.get(lastCmd).equals("Registar") || opts.get(lastCmd).equals("Autenticar"))){
                                     while ((current = sin.readLine()) != null) {
@@ -91,7 +92,20 @@ public class  ClientConnection {
                         e.printStackTrace();
                     }
                     }
+
+
+            private String filterSpacesFrom (String s) {
+                while(s.contains(" ")){
+                    String[] ss = s.split(" ");
+                    String res = "";
+                    for(String str: ss)
+                        res += str;
+                    s = res;
+                }
+                return s;
+            }
         };readTerminal.start();
+
 
 
         Thread readServer = new Thread() {
