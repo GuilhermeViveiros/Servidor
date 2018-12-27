@@ -21,11 +21,11 @@ public class  ClientConnection {
     private PrintWriter pw;
     private BufferedReader br;
     private Socket s;
-    private BufferedReader sin;
-    private Map<String,String> opts = new HashMap<>();
+    private volatile BufferedReader sin;
+    private volatile Map<String,String> opts = new HashMap<>();
     private String lastCmd;
 
-    private Boolean requestingInput;
+    private volatile Boolean requestingInput;
 
     private ReentrantLock lock;
     private Condition con;
@@ -48,11 +48,24 @@ public class  ClientConnection {
                     try {
                         while ((current = br.readLine()) != null) {
                             if (requestingInput) {
+                                /*if(current.equals("quit") && (opts.get(lastCmd).equals("Registar") || opts.get(lastCmd).equals("Autenticar"))){
+                                    while ((current = sin.readLine()) != null) {
+                                        if(current.equals("$SendReply")){
+                                            break;
+                                        }
+                                    }
+                                    opts = new HashMap<>();
+                                    pw.println("Login");
+                                }*/
+                                //System.out.println(current.equals("quit"));
+                                //System.out.println(lastCmd);
                                 try {
                                     lock.lock();
                                     String toAppend = opts.get(lastCmd);
-                                    toAppend += " " + current;
-                                    opts.replace(lastCmd, toAppend);
+                                    if(toAppend != null) {
+                                        toAppend += " " + current;
+                                        opts.replace(lastCmd, toAppend);
+                                    }
                                     requestingInput = false;
                                     con.signal();
                                 }finally {
@@ -60,7 +73,7 @@ public class  ClientConnection {
                                 }
                                 //System.out.println("Full command: " + toAppend);
                             } else if (opts.containsKey(current)) {
-                                // System.out.println(current);
+                                System.out.println(current);
                                 lastCmd = current;
                                 pw.println(opts.get(current));
                             } else {
@@ -88,7 +101,6 @@ public class  ClientConnection {
                 try {
                     while ((current = sin.readLine()) != null) {
                         readInterpreter(current);
-                        // System.out.println(current);
                     }
 
                     br.close();
@@ -121,8 +133,6 @@ public class  ClientConnection {
                                 while (requestingInput) {
                                     con.await();
                                 }
-
-
                                 break;
                             case "SendReply":
                                 requestingInput = false;
@@ -130,6 +140,9 @@ public class  ClientConnection {
                                 break;
                             case "Clear":
                                 opts = new HashMap<>();
+                                break;
+                            case "Exit":
+                                System.exit(0);
                                 break;
                             default:
                                 output += opts.size() + " - ";

@@ -84,7 +84,9 @@ public class Interface {
             System.out.println(messages.length);
 
             switch (messages[0]) {
-
+                case "Login":
+                    if(messages.length == 1)
+                        pw.println(Login());
                 case "Registar":
                     if (messages.length == 4) {
                         if((this.c = ClientData.addUser(messages[1], messages[2], messages[3]))!=null){//itentificação estar correta
@@ -156,7 +158,7 @@ public class Interface {
                     break;
 
                 case "Leave_Program" :
-                    pw.println("\nVolte Sempre!!!\n\n");
+                    pw.println("\nVolte Sempre!!!\n$Exit\n");
                     s.shutdownOutput();
                     break;
 

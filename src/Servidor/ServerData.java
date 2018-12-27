@@ -2,10 +2,7 @@ package Servidor;
 
 import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -39,7 +36,13 @@ public class ServerData {
     public static String showServers(){
         String current = "";
         for(String x:servers.keySet()){
-            current = current + "Tipo: " + x + " e Preço por hora: " + servers.get(x).get(0).getCost() + "\n";
+            int nRequisitados = 0;
+            nRequisitados = (int) servers.get(x).stream().filter(s -> s.getInUse() == true).count();
+
+
+            current = current + "Tipo: " + x + ", Preço por hora: " + servers.get(x).get(0).getCost() +
+                    "  e número de servidores disponiveis: "
+                    + Integer.toString(servers.get(x).size()- nRequisitados) + "\n";
         }
 
         return current;
