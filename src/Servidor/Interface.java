@@ -84,7 +84,9 @@ public class Interface {
             System.out.println(messages.length);
 
             switch (messages[0]) {
-
+                case "Login":
+                    if(messages.length == 1)
+                        pw.println(Login());
                 case "Registar":
                     if (messages.length == 4) {
                         if((this.c = ClientData.addUser(messages[1], messages[2], messages[3]))!=null){//itentificação estar correta
@@ -107,6 +109,7 @@ public class Interface {
                             pw.println(Services());
                         }else{
                             pw.println("\nDados errados.\n\n" + Login());
+                            this.c = new Client();
                         }
                     }
                     else pw.println("\n$Request - Digite o seu email\n$Request - Digite a sua password\n$SendReply");
@@ -138,12 +141,18 @@ public class Interface {
 
                 case "Saldo" :
                     if(messages.length == 2) pw.println("Valor a pagar  = " + ClientData.Debts(c.getEmail(), Integer.parseInt(messages[1])) );
-                    else pw.println("Valor a pagar  = " + ClientData.Debts(c.getEmail()));
+                    else pw.println("Valor a pagar = " + String.format("%.2f", ClientData.Debts(c.getEmail())));
                     pw.println(Services());
                     break;
 
                 case "Leave" :
                     if(messages.length == 3) {
+                        int id = -1;
+                        try{
+                            id = Integer.parseInt(messages[2]);
+                        } catch (NumberFormatException e){
+                            pw.println("Introduza um número válido\n" + Services());
+                        }
                         if(!ClientData.LeaveServer(c.getEmail(),messages[1],Integer.parseInt(messages[2]))) {
                             pw.println("\nTipo/Id do server errados.Tente novamente.\n" + Services());
                         }
@@ -156,7 +165,7 @@ public class Interface {
                     break;
 
                 case "Leave_Program" :
-                    pw.println("\nVolte Sempre!!!\n\n");
+                    pw.println("\nVolte Sempre!!!\n$Exit\n");
                     s.shutdownOutput();
 
                     break;
@@ -169,7 +178,7 @@ public class Interface {
                             aux = messages[1];
                             pw.println(Services());
                         }
-                    }else pw.println("\n$Request - Digite qual o server que pretende leiloar\n$Request - Quanto deseja pagar pelo mesmo?\n$SendReply\n");
+                    }else pw.println("\n"+ ServerData.showServers() +"\n$Request - Digite qual o server que pretende leiloar\n$Request - Quanto deseja pagar pelo mesmo?\n$SendReply\n");
 
                     break;
                 default:
@@ -177,7 +186,10 @@ public class Interface {
                     break;
 
             }
-        }finally {
+        }catch (Exception e){
+            pw.println("Aconteceu um erro inesperado: " + e.getMessage() + "\nVolte a fazer login\n" + Login());
+            e.printStackTrace();
+        } finally {
             this.lock.unlock();
         }
 
