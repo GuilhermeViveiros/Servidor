@@ -158,6 +158,7 @@ public class Interface {
                 case "Leave_Program" :
                     pw.println("\nVolte Sempre!!!\n\n");
                     s.shutdownOutput();
+
                     break;
 
                 case "Leiloar_Server":

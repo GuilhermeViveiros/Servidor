@@ -121,8 +121,6 @@ public class  ClientConnection {
                                 while (requestingInput) {
                                     con.await();
                                 }
-
-
                                 break;
                             case "SendReply":
                                 requestingInput = false;
