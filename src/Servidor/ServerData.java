@@ -118,4 +118,6 @@ public class ServerData {
     public static void setServers(Map<String, List<Server>> servers) {
         ServerData.servers = servers;
     }
+
+
 }
