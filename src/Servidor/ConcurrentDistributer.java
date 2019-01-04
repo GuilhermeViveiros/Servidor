@@ -8,14 +8,13 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class ConcurrentDistributer {
 
-    private ReentrantLock lock = new ReentrantLock();
+    private static ReentrantLock lock = new ReentrantLock();
     private static int help = 0;
 
 
     //distribui os servers requesitados pelos clientes
     public void distribute_servers() {
-        try {
-            lock.lock();
+
             Thread x = new Thread() { //thread que trata dos servers a serem requesitados
                 public void run() {
                     while (!ClientData.getRequired_servers().isEmpty()) { //enquanto tiver servers a serem requesitados
@@ -32,7 +31,8 @@ public class ConcurrentDistributer {
 
                             }
                             //aqui tenho a certeza que um servidor está livre , neste caso o sv
-
+                            try {
+                            lock.lock();
                             //caso não esteja em uso nem a leilao
                             if (!sv.getInUse()) {//se não estiver em uso
                                 sv.TurnOn("Requesitado");
@@ -54,21 +54,17 @@ public class ConcurrentDistributer {
                                     break;
                                 }
                             }
-                        }
+                        } finally {
+                                lock.unlock();
+                            }
                     }
                 }
-            };
-            x.start();
-        }finally {
-            lock.unlock();
-        }
+            }
+        };x.start();
     }
 
     //distribui os servers leiloados pelos clientes
     public void deal_sale_servers(String Server_name) {
-        try {
-
-            lock.lock();
             //atribui um cliente a este servidor
             Thread x = new Thread() {
 
@@ -82,7 +78,9 @@ public class ConcurrentDistributer {
                         System.out.println("Acordei");
 
                     }
+                    try {
 
+                        lock.lock();
                     if (ClientData.getSale_servers().containsKey(sv.getName())) {//ver se ainda tem clientes há espera
 
                         String Client_email = "";//cliente name para o cliente que der mais pelo server
@@ -101,12 +99,12 @@ public class ConcurrentDistributer {
                         ClientData.addClients_msg("all", temp, Client_email);//manda mensagem para todos os clientes
                         ClientData.removeSaleServer(Server_name);//remove o server x do leilao porque já tem cliente
                     }
-                }
-            };
-            x.start();
-        }finally {
-            lock.unlock();
-        }
+                } finally {
+                        lock.unlock();
+                    }
+            }
+
+        }; x.start();
     }
 
 }

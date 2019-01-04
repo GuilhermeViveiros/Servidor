@@ -24,6 +24,8 @@ public class ClientData {
     //mapa de mensagens para cada cliente
     private static Map<String,LinkedList<String>> clients_msg = new HashMap<>();
 
+    private static ConcurrentDistributer cd = new ConcurrentDistributer();
+
 
 
 
@@ -227,7 +229,7 @@ public class ClientData {
                 }
                 System.out.println("Cliente quer comprar server " + Client_email + " " +  Server_name);
 
-                ConcurrentDistributer.deal_sale_servers(Server_name);//trata dos servers a leilao
+                cd.deal_sale_servers(Server_name);//trata dos servers a leilao
 
 
                 return true;

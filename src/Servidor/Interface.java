@@ -15,6 +15,7 @@ public class Interface {
     private final ReentrantLock lock = new ReentrantLock();
     private String[] messages;
     private String aux;
+    private ConcurrentDistributer cd = new ConcurrentDistributer();
 
 
     public Interface(Socket s) throws IOException {
@@ -125,7 +126,7 @@ public class Interface {
                         if(!ClientData.RequestServer(c.getEmail(),messages[1])){
                             pw.println("\nDigite um tipo de server correto!\n\n" + Services());
                         }else{
-                            ConcurrentDistributer.distribute_servers();//começa a distribuir os servers
+                            cd.distribute_servers();//começa a distribuir os servers
                             System.out.println(messages[1]);
                             pw.println(Services());
                         }
