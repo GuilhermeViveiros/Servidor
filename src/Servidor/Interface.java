@@ -96,7 +96,7 @@ public class Interface {
                             pw.println(Services());
                         }else{
                             this.c = new Client();
-                            pw.println("\nDigitos errados , email já está a ser utilizador.Tente novamente\n\n");
+                            pw.println("\nDigitos errados , email já está a ser utilizado.Tente novamente\n"+Login()+"\n");
                         }
                     }
 

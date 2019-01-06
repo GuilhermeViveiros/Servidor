@@ -81,12 +81,12 @@ public class Client implements User {
     public static void main(String args[]){
         try {
             //Versão para correr o servidor noutro pc
-            //Socket s = new Socket(InetAddress.getLocalHost().getHostAddress(),9998);
-            //new ClientConnection(new Client(), s);
+            Socket s = new Socket(InetAddress.getLocalHost().getHostAddress(),9998);
+            new ClientConnection(new Client(), s);
 
-            Socket s = new Socket("localhost",9998);
+            //Socket s = new Socket("localhost",9998);
 
-            new ClientConnection(new Client(),s);
+            //new ClientConnection(new Client(),s);
 
         }catch (Exception e){
             e.printStackTrace();

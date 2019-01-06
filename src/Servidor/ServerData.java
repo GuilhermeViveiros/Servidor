@@ -20,12 +20,13 @@ public class ServerData {
         List<Server> f4Server = new ArrayList<>();
         servers_conditions.put("f4Server",lock.newCondition());
 
-        t3Server.add(new ServerGenerator("t3Server",20F,1));
-        m5Server.add(new ServerGenerator("m5Server",10F,2));
-        m5Server.add(new ServerGenerator("m5Server",10F,3));
-        f4Server.add(new ServerGenerator("f4Server",2F,4));
-        //f4Server.add(new ServerGenerator("f4Server",2F,5));
-        //f4Server.add(new ServerGenerator("f4Server",3F,6));
+        t3Server.add(new ServerGenerator("t3Server",200F,1));
+        m5Server.add(new ServerGenerator("m5Server",300F,2));
+        m5Server.add(new ServerGenerator("m5Server",300F,3));
+        f4Server.add(new ServerGenerator("f4Server",100F,4));
+        m5Server.add(new ServerGenerator("m5Server",300F,5));
+        m5Server.add(new ServerGenerator("m5Server",3F,6));
+        t3Server.add(new ServerGenerator("t3Server",200F,1));
 
         servers.put("t3Server",t3Server);
         servers.put("m5Server",m5Server);
