@@ -202,8 +202,10 @@ public class ClientData {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        acquired_servers.get(Client_email).remove(sv);//reitra o server dos adquiridos do servidor
-                        return true;
+                        if(acquired_servers.containsKey(Client_email)){
+                            acquired_servers.get(Client_email).remove(sv);//reitra o server dos adquiridos do servidor
+                            return true;
+                        }
                     }
                 }
             }

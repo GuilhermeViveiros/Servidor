@@ -189,8 +189,8 @@ public class Interface {
 
             }
         }catch (Exception e){
-            pw.println("Aconteceu um erro inesperado: " + e.getMessage() + "\nVolte a fazer login\n" + Login());
             e.printStackTrace();
+            pw.println("Aconteceu um erro inesperado: " + e.getMessage() + "\nVolte a fazer login\n" + Login());
         } finally {
             this.lock.unlock();
         }

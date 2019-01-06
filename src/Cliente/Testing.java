@@ -25,11 +25,7 @@ public class Testing {
     private static void prepareRequisitar2(){
         for(String user: clientes.keySet()){
             actions.get(user).push("Requisitar f4Server");
-            actions.get(user).push("Requisitar f4Server");
-            actions.get(user).push("Requisitar f4Server");
-            actions.get(user).push("Requisitar f4Server");
-            actions.get(user).push("Requisitar f4Server");
-            actions.get(user).push("Requisitar f4Server");
+            actions.get(user).push("Requisitar m5Server");
         }
     }
 
@@ -50,13 +46,15 @@ public class Testing {
 
     private static void prepareAutenticar(){
         for(String user : actions.keySet())
-            actions.get(user).push("Autenticar " + user + " " + clientes.get(user).getKey() + " " + clientes.get(user).getValue());
+            actions.get(user).push("Autenticar " + clientes.get(user).getKey() + " " + clientes.get(user).getValue());
     }
 
-    private static void err1(){
-        prepareRequisitar1();
-        for(String user : actions.keySet())
+    private static void custom(){
+        for(String user : actions.keySet()){
+            prepareLeaveAllServers();
+            actions.get(user).push("Leiloar_Server m5Server 10");
             actions.get(user).push("Requisitar m5Server");
+        }
     }
 
 
@@ -85,7 +83,7 @@ public class Testing {
             pw.put(user, new PrintWriter(s.getOutputStream(), true));
         }
 
-        err1();
+        prepareLeaveAllServers();
         prepareAutenticar();
         for(int i = 0; i < actions.get("Zé").size(); i++)
             for(String user: actions.keySet()){
