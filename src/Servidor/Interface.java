@@ -95,6 +95,7 @@ public class Interface {
                             answers();
                             pw.println(Services());
                         }else{
+                            this.c = new Client();
                             pw.println("\nDigitos errados , email já está a ser utilizador.Tente novamente\n\n");
                         }
                     }
